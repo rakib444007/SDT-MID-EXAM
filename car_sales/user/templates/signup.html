@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags%}
+{% block content %}
+
+<div class="sig container text-white " >
+
+    <form style=" margin: auto; " method="post">
+        <h1>{{type}} page</h1>
+        {% if form.non_field_errors %}
+        <div class="alert alert-danger text-dark">
+            {% for er in form.non_field_errors %}
+            <p>{{ er }}</p>
+            {% endfor %}
+        </div>
+
+        {% endif %}
+        <div>
+            {% csrf_token %}
+            <!-- {{form|crispy}} -->
+            {% for fm in form %}
+            <span style="font-weight: bold;">{{fm.label_tag}}</span>
+            {{fm}}
+            {{fm.errors|striptags}}
+            {% endfor %}
+        </div>
+        <button class="btn btn-primary mt-4" style="border-radius: 20px;">Submit</button>
+    </form>
+</div>
+{% endblock content %}

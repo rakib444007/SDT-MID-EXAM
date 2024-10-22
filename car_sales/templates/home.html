@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block BannerContainer %}
+
+{% load static %}
+<div class="banner container ">
+
+  <div class="banner-left text-white ">
+    <h2 style="font-weight: bold; font-style: oblique; font-family: Serif; font-size: 2.3rem;">Find Your Dream Car Today
+    </h2>
+    <p style="font-weight: bold; width: 80%; font-family: Cursive;">Explore our wide range of new and used cars at
+      unbeatable prices.
+      From top brands to budget-friendly options, we have the perfect car for you.Discover reliable cars with
+      competitive pricing.
+      Shop now and drive home in your dream car today!</p>
+
+  </div>
+
+  <div class="banner-right">
+    <img class="banner-img" src="{% static './car.jpg' %}" alt="">
+  </div>
+</div>
+
+
+
+{% endblock BannerContainer %}
+
+{% block content %}
+
+
+
+<div>
+  <h1 class="text-white " style="text-align: center; font-weight: bold; font-size:50px; margin-top: 70px;">Select Brand Name</h1>
+  <div class="d-flex justify-content-center">
+    
+    {% for bar in brand  %}
+    <a class="animationtwo btn btn-danger pl-5 pr-5 text-white mx-4 my-3" href="{% url 'brand_wise_car' bar.slug%}">{{bar.name}}</a>
+    {% endfor %}
+  
+  </div> 
+  <div style="text-align: center; margin-top: 30px; font-weight: bold; font-family: Serif;">
+    <h1 class="text-white">Total Car : {{data | length}}</h1>
+  </div>
+
+
+  <div class="d-flex flex-wrap   pt-5 container">
+    {% for post in data %}
+    <div class="col-sm-4  ">
+      <div style="border-radius: 10px; background-color: rgb(17, 17, 17); box-shadow: 3px 3px 3px 2px rgba(65, 65, 67, 0.439);"
+        class="animation mx-2 my-2 text-white">
+        <img style="border-radius: 8px;" class="car-img" src="{{post.image.url}}" alt="car-photo" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title">{{post.name}}</h5>
+          <p>Price: {{post.price}}</p>
+          <p>Brand: {{post.brand.name}}</p>
+          <p class="card-text">Description: {{post.description | truncatewords:10}}</p>
+
+          <a class="btn btn-success  btn-outline-secondary text-dark" href="{% url 'car_details' post.id %}" style="font-weight: bold;">View Details</a>
+
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+</div>
+<div class=" py-4 " style="border: 1px solid gray; margin-top: 100px; background-color: #37484a; color: rgb(150, 244, 239);">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-4">
+        <h1 style="font-weight: bold;">About Us</h1>
+        <p style="font-family:Cursive ; width: 70%;">
+          Welcome to our car sales website where you can find a wide variety of cars from top brands. We offer the best deals and an easy buying experience.
+        </p>
+      </div>
+
+      <div class="col-md-4">
+        <h3 style="font-weight: bold;">Quick Links</h3>
+        <ul class="list-unstyled q" >
+          <li ><a href="{% url 'homepage' %}" class=" faa" style="color:rgb(150, 244, 239);">Home</a></li>
+          <li><a href="{% url 'profile' %}" class=" faa" style="color:rgb(150, 244, 239);">Profile</a></li>
+          <li><a href="{% url 'homepage' %}" class=" faa" style="color:rgb(150, 244, 239);">Cars</a></li>
+          <li><a href="#" class=" faa"  style="color:rgb(150, 244, 239);">Contact Us</a></li>
+      
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <h3 style="font-weight: bold;">Contact Us</h3>
+        <p>Email: Owncar@carsales.com</p>
+        <p>Phone: +1 123 456 7890</p>
+        <p>Address: 32 Dhanmondi Car Street, Dhaka City, 4567</p>
+        
+        <div class="mt-2 ico">
+          <a style="font-size: 30px;" href="https://www.facebook.com/TOYOTA.Global" target="_blank" class="text-white me-3"><i class="fa-brands fa-square-facebook"></i></i></a>
+          <a style="font-size: 30px;" href="https://x.com/Toyota" target="_blank" class="text-white me-3"><i class="fa-brands fa-twitter"></i></a>
+          <a style="font-size: 30px;" href="https://www.instagram.com/toyota/" target="_blank" class="text-white"><i class="fa-brands fa-instagram"></i></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col text-center">
+        <p>&copy; 2024 Car Sales Website. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
